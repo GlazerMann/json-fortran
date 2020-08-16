@@ -121,6 +121,26 @@ matrix:
         - CODE_COVERAGE="no"
         - DEPLOY_DOCUMENTATION="no"
 
+    - os: linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - nodejs
+            - npm
+            - gfortran-10
+            - binutils
+            - python-pip
+      env:
+        - GFORTRAN=gfortran-10
+        - GCOV=gcov-10
+        # build with build.sh, run unit tests
+        - BUILD_SCRIPT="./build.sh --skip-documentation && ./build.sh --skip-documentation --enable-unicode"
+        - CODE_COVERAGE="no"
+        - DEPLOY_DOCUMENTATION="no"
+
 install:
   - |
     if [[ ! -d "$HOME/.local/bin" ]]; then
