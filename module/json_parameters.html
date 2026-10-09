@@ -94,7 +94,7 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.8% of total for modules and submodules.">62 statements</a>
+                 title=" 0.7% of total for modules and submodules.">61 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
@@ -141,7 +141,6 @@
             <a class="list-group-item" href="../module/json_parameters.html#variable-carriage_return">carriage_return</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-chunk_size">chunk_size</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-colon_char">colon_char</a>
-            <a class="list-group-item" href="../module/json_parameters.html#variable-control_chars">control_chars</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-default_real_fmt">default_real_fmt</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-delimiter">delimiter</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-dot">dot</a>
@@ -151,8 +150,8 @@
             <a class="list-group-item" href="../module/json_parameters.html#variable-false_str">false_str</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-formfeed">formfeed</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-horizontal_tab">horizontal_tab</a>
-            <a class="list-group-item" href="../module/json_parameters.html#variable-i_">i_</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-int_fmt~2">int_fmt</a>
+            <a class="list-group-item" href="../module/json_parameters.html#variable-iomsg_len">iomsg_len</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-json_array">json_array</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-json_double">json_double</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-json_ext">json_ext</a>
@@ -170,7 +169,7 @@
             <a class="list-group-item" href="../module/json_parameters.html#variable-minexp">minexp</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-newline">newline</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-null_str">null_str</a>
-            <a class="list-group-item" href="../module/json_parameters.html#variable-print_str_chunk_size">print_str_chunk_size</a>
+            <a class="list-group-item" href="../module/json_parameters.html#variable-print_str_initial_buffer_size">print_str_initial_buffer_size</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-pushed_char_size">pushed_char_size</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-quotation_mark">quotation_mark</a>
             <a class="list-group-item" href="../module/json_parameters.html#variable-real_exponent_digits">real_exponent_digits</a>
@@ -687,23 +686,6 @@ parameter
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-control_chars"></span>
-              character(kind=CK, len=*),
-            </td>
-              <td>public,</td>
-            <td>
-parameter,               dimension(32)
-            </td>
-            <td>::</td>
-            <td><strong>control_chars</strong></td>
-<td> =</td>
-                <td>[(achar(i_, kind=CK), i_=1, 31), achar(127, kind=CK)]</td>
-            <td>
-                <p>Control characters, possibly in unicode</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
               <span class="anchor" id="variable-default_real_fmt"></span>
               character(kind=CDK, len=*),
             </td>
@@ -859,23 +841,6 @@ parameter
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-i_"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>i_</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                <p>just a counter for <code>control_chars</code> array</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
               <span class="anchor" id="variable-int_fmt~2"></span>
               character(kind=CDK, len=*),
             </td>
@@ -889,6 +854,23 @@ parameter
                 <td>&#39;(ss,I0)&#39;</td>
             <td>
                 <p>minimum width format for integers</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iomsg_len"></span>
+              integer(kind=IK),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>iomsg_len</strong></td>
+<td> =</td>
+                <td>256_IK</td>
+            <td>
+                <p>length of <code>iomsg</code> strings used in IO statements</p>
             </td>
         </tr>
         <tr>
@@ -1193,7 +1175,7 @@ parameter
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-print_str_chunk_size"></span>
+              <span class="anchor" id="variable-print_str_initial_buffer_size"></span>
               integer(kind=IK),
             </td>
               <td>public,</td>
@@ -1201,11 +1183,11 @@ parameter
 parameter               
             </td>
             <td>::</td>
-            <td><strong>print_str_chunk_size</strong></td>
+            <td><strong>print_str_initial_buffer_size</strong></td>
 <td> =</td>
-                <td>1000_IK</td>
+                <td>10000_IK</td>
             <td>
-                <p>chunk size for writing <abbr title="JavaScript Object Notation: A human friendly syntax for storing and exchanging data">JSON</abbr> to a string</p>
+                <p>initial buffer size for writing <abbr title="JavaScript Object Notation: A human friendly syntax for storing and exchanging data">JSON</abbr> to a string</p>
             </td>
         </tr>
         <tr>
@@ -1595,14 +1577,14 @@ See 9.5.6.12 in the F2003/08 standard</p>
           <div class="col">
             <p>
               JSON-Fortran
- was developed by Jacob Williams<br>              &copy; 2025 
+ was developed by Jacob Williams<br>              &copy; 2026 
 </p>
           </div>
           <div class="col">
             <p class="text-end">
               Documentation generated by
               <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2025-12-04 12:41 +0000             </p>
+ on 2026-10-09 15:43 +0000             </p>
           </div>
         </div>
         <br>
